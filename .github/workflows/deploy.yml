@@ -1,4 +1,4 @@
-name: Deploy HTML
+name: Trigger Webhook via POST
 
 on:
   push:
@@ -6,15 +6,12 @@ on:
       - main
 
 jobs:
-  deploy:
+  trigger-webhook:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repo
-        uses: actions/checkout@v3
-
-      - name: Deploy HTML via curl
+      - name: Send POST to webhook
         run: |
           curl -X POST http://178.33.40.53:5678/webhook-test/product-check \
-          -H "Content-Type: text/html" \
-          --data-binary @index.html
+          -H "Content-Type: application/json" \
+          -d '{"trigger": "GitHub Action Deploy"}'
