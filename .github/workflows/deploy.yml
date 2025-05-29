@@ -1,4 +1,4 @@
-name: Trigger Webhook via POST
+name: Trigger Webhook
 
 on:
   push:
@@ -10,8 +10,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Send POST to webhook
+      - name: Trigger POST request to webhook
         run: |
           curl -X POST http://178.33.40.53:5678/webhook-test/product-check \
-          -H "Content-Type: application/json" \
-          -d '{"trigger": "GitHub Action Deploy"}'
+            -H "Content-Type: application/json" \
+            -d '{"message": "Triggered from GitHub Action"}'
